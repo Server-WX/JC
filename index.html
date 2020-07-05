@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PingFang SC", "Microsoft Yahei",
+    sans-serif;
+}
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./background.jpg);
+  background-size: cover;
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 左右padding */
+  padding: 0 5vw;
+  height: 80px;
+  background-color: rgba(65, 81, 101, 0.9);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: #dadbdd;
+  /* 占一半宽度 */
+  flex: 1;
+}
+
+.nav-menu {
+  /* 占令一半宽度 */
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+
+  /* 最宽550px */
+  max-width: 550px;
+}
+
+.nav-menu li,a {
+  list-style: none;
+  color: #dadbdd;
+  font-weight: 600;
+  text-decoration:none;
+}
+
+.burger div {
+  /* 设置汉堡按钮三层条 */
+  width: 25px;
+  height: 3px;
+  background-color: #dadbdd;
+  margin: 4px;
+}
+
+.burger {
+  display: none;
+}
+
+/* 屏幕适配 */
+@media screen and (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+
+  /* 小屏幕菜单显示位置为右侧抽屉形式 */
+  .nav-menu {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    bottom: 0;
+    width: 50vw;
+    height: calc(100vh - 80px);
+
+    background-color: rgb(65, 81, 101, 0.9);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: none;
+    
+    /* 动画 */
+    transform: translateX(100%);
+    
+  }
+  
+  .op{
+      display: flex;
+  }
+
+  /* 菜单打开时，滑到初始位置 */
+  .nav-menu.open {
+    
+    transform: translateX(0);
+    transition: 0.4s ease-in-out;
+    
+  }
+
+  /* 每个菜单项默认看不到，向右移动20象素 */
+  .nav-menu li {
+    /* 上下间距 */
+    margin: 3vh;
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
+  /* 汉堡按钮被点开时，设置按钮过渡 */
+  .burger.active div {
+    transition: 0.3s ease-in-out 0.3s;
+  }
+
+  /* 第一条线旋转45度 */
+  .burger.active .top-line {
+    transform: rotate(45deg) translate(4px, 6px);
+  }
+
+  /* 第三条线旋转-45度 */
+  .burger.active .bottom-line {
+    transform: rotate(-45deg) translate(4px, -6px);
+  }
+
+  /* 中间线向右移动并变为透明 */
+  .burger.active .middle-line {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: 0.3s ease-in-out;
+  }
+
+  /* 菜单项滑入动画 */
+  @keyframes slideIn {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    </style>
+    <title>無欣Web前端</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">無欣前端</div>
+      <ul class="nav-menu">
+        <li><a href="">首页</a></li>
+        <li><a href="">关于我</a></li>
+        <li><a href="">我的作品</a></li>
+        <li><a href="">联系我</a></li>
+      </ul>
+      <div class="burger">
+        <div class="top-line"></div>
+        <div class="middle-line"></div>
+        <div class="bottom-line"></div>
+      </div>
+    </nav>
+
+    <div class="background"></div>
+    <script>
+    
+        // 获取汉堡按钮
+ burger = document.querySelector(".burger");
+// 获取导航菜单
+const navMenu = document.querySelector(
+  ".nav-menu"
+);
+
+//获取菜单项
+const navMenuItems = document.querySelectorAll(
+  ".nav-menu li"
+);
+
+//注册监听
+burger.addEventListener("click", () => {
+  // 汉堡按钮
+  burger.classList.toggle("active");
+  // 导航菜单开关
+  
+  navMenu.classList.toggle("op");
+  
+  navMenu.classList.toggle("open");
+  // 菜单项动画
+  navMenuItems.forEach((item, index) => {
+    // 如果已添加animation,先取消
+    if (item.style.animation) {
+      item.style.animation = "";
+    } else {
+      item.style.animation = `0.3s ease-in slideIn forwards ${index *
+        0.1 +
+        0.3}s`;
+    }
+  });
+});
+    </script>
+  </body>
+</html>
