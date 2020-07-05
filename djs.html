@@ -20,14 +20,17 @@
 </head>
 <body>
     <script>
-        var a = prompt("请输入整数");
-        Dome(a)
-        function Dome(Time) {
-            while(Time > 0) {
-                document.write("T-" + Time + "<br>");
-                Time--;
-            }
-        }
+        function test1(time){
+              while(time > 0){
+	               document.write("<br>" + time);
+	            
+	               time--;
+	           }
+	           
+	      }
+	       
+	       
+	       test1(window.prompt("请输入数字"));
     </script>
 </body>
 </html>
