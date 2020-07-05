@@ -32,6 +32,7 @@ nav {
   padding: 0 5vw;
   height: 80px;
   background-color: rgba(65, 81, 101, 0.9);
+  overflow:hidden;
 }
 
 .logo {
@@ -90,15 +91,10 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    display: none;
+    
     
     /* 动画 */
     transform: translateX(100%);
-    
-  }
-  
-  .op{
-      display: flex;
   }
 
   /* 菜单打开时，滑到初始位置 */
@@ -107,6 +103,10 @@ nav {
     transform: translateX(0);
     transition: 0.4s ease-in-out;
     
+  }
+  
+  .op{
+      overflow: visible;
   }
 
   /* 每个菜单项默认看不到，向右移动20象素 */
@@ -153,7 +153,7 @@ nav {
     <title>無欣Web前端</title>
   </head>
   <body>
-    <nav>
+    <nav id="po">
       <div class="logo">無欣前端</div>
       <ul class="nav-menu">
         <li><a href="">首页</a></li>
@@ -189,7 +189,7 @@ burger.addEventListener("click", () => {
   burger.classList.toggle("active");
   // 导航菜单开关
   
-  navMenu.classList.toggle("op");
+  po.classList.toggle("op");
   
   navMenu.classList.toggle("open");
   // 菜单项动画
